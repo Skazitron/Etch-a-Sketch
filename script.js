@@ -12,7 +12,7 @@ regularGridRow.classList = 'row';
 regularGridColumn.classlist = 'column';
 regularGridColumn.cssText = 'display: inline;'
 regularGridRow.appendChild(regularGridColumn);
-regularGridColumn.style.cssText = 'border: 2px solid grey; width:150px; height:150px; text-align: center; display:inline-block; background-color: white; margin-right: -2px';
+regularGridColumn.style.cssText = 'border: 2px solid grey; width:10px; height:10px; text-align: center; display:inline-block; background-color: white; margin-right: -2px';
 regularGridRow.style.cssText = 'text-align: center; margin-bottom: -7px;'
 
 // button for selecting grid layout
@@ -24,17 +24,26 @@ buttonGridSelector.style.cssText = 'color: white; background-color: black; borde
 buttonGridSelector.addEventListener('click', gridLayout)
 function gridLayout(e){
     console.log(e.target.classList.value)
-    regularGridRow.appendChild(regularGridColumn);
+    sketchBox.innerHTML = ''
+    regularGridRow.innerHTML = ''
     sketchBox.appendChild(regularGridRow);
     if(e.target.classList.value == 'select-button'){
-        for(i=0; i<tempColumnNum -1; i++){
+        for(i=0; i<tempColumnNum; i++){
             regularGridRow.appendChild(regularGridColumn.cloneNode(true));
         }
-        for(i=0; i<tempRowNum - 1; i++){
+        for(i=1; i<tempRowNum; i++){
             sketchBox.appendChild(regularGridRow.cloneNode(true));
         }
     }
 }
+
+//button for reset
+var buttonReset = document.createElement('button')
+buttonReset.style.cssText = buttonGridSelector.style.cssText;
+buttonReset.textContent = 'Reset'
+buttonReset.addEventListener('click', function(){
+    regularGridColumn.style.cssText = regularGridColumn.style.cssText;
+})
 
 // options 
 var optionGridRow = document.createElement('select');
@@ -44,7 +53,7 @@ var optionGridColumn = document.createElement('select');
 optionGridColumn.addEventListener('change', selectFunction);
 optionGridColumn.id = 'setColumn';
 var optionsList = document.createElement('option');
-for(i=1; i<=8; i++){
+for(i=1; i<=64; i++){
     optionsList.value = i;
     optionsList.textContent = i;
     optionGridRow.appendChild(optionsList.cloneNode(true))
@@ -84,5 +93,6 @@ sketchBox.appendChild(regularGridRow)
 //testing
 mainBox.appendChild(optionsBox);
 mainBox.appendChild(buttonGridSelector);
+mainBox.appendChild(buttonReset)
 body.appendChild(sketchBox)
 
