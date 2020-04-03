@@ -35,6 +35,7 @@ function gridLayout(e){
             sketchBox.appendChild(regularGridRow.cloneNode(true));
         }
     }
+    body.appendChild(sketchBox)
 }
 
 //button for reset
@@ -53,7 +54,13 @@ var optionGridColumn = document.createElement('select');
 optionGridColumn.addEventListener('change', selectFunction);
 optionGridColumn.id = 'setColumn';
 var optionsList = document.createElement('option');
-for(i=1; i<=64; i++){
+var optionRow = document.createElement('option');
+var optionColumn = document.createElement('option')
+optionRow.textContent = "Row"
+optionColumn.textContent = "Column"
+optionGridRow.appendChild(optionRow);
+optionGridColumn.appendChild(optionColumn);
+for(i=2; i<=64; i++){
     optionsList.value = i;
     optionsList.textContent = i;
     optionGridRow.appendChild(optionsList.cloneNode(true))
@@ -61,7 +68,7 @@ for(i=1; i<=64; i++){
 }
 var optionsBox = document.createElement('div')
 optionsBox.style.cssText = 'margin-top: 10px; margin-bottom: 8px;'
-optionsBox.textContent = 'Rows and Columns: '
+optionsBox.textContent = 'Grid Layout: '
 optionsBox.appendChild(optionGridRow);
 optionsBox.appendChild(optionGridColumn);
 var tempColumnNum;
@@ -94,5 +101,4 @@ sketchBox.appendChild(regularGridRow)
 mainBox.appendChild(optionsBox);
 mainBox.appendChild(buttonGridSelector);
 mainBox.appendChild(buttonReset)
-body.appendChild(sketchBox)
 
