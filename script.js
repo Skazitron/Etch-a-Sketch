@@ -36,6 +36,7 @@ function gridLayout(e){
     if(e.target.classList.value == 'select-button'){
         for(i=0; i<tempColumnNum; i++){
             regularGridColumn.id = 'column' + i;
+            regularGridColumn.classList = 'column'
             regularGridRow.appendChild(regularGridColumn.cloneNode(true));
         }
         for(i=1; i<tempRowNum; i++){
@@ -46,14 +47,6 @@ function gridLayout(e){
 
     body.appendChild(sketchBox)
 }
-
-//button for reset
-var buttonReset = document.createElement('button')
-buttonReset.style.cssText = buttonGridSelector.style.cssText;
-buttonReset.textContent = 'Reset'
-buttonReset.addEventListener('click', function(){
-    regularGridRow.childNodes.style.backgroundColor = 'white'
-})
 
 // options 
 var optionGridRow = document.createElement('select');
@@ -81,11 +74,10 @@ optionsBox.style.cssText = 'margin-top: 10px; margin-bottom: 8px;'
 optionsBox.textContent = 'Grid Layout: '
 optionsBox.appendChild(optionGridRow);
 optionsBox.appendChild(optionGridColumn);
-function selectFunction(e){ // how do I pick the specific option?
+function selectFunction(e){
     let selectedIndex = event.target.selectedIndex;
     console.log(e.target.options[selectedIndex].value);
     var whichSelect = e.target.id
-    console.log(e.target.id)
     if(whichSelect == 'setRow'){
         tempRowNum = tempRowNum = Number(e.target.options[selectedIndex].value);
     }
@@ -99,15 +91,23 @@ function selectFunction(e){ // how do I pick the specific option?
     else if (tempRowNum <= tempColumnNum){
         scaleSize = 700/tempColumnNum;
     }
-    console.log(tempRowNum);
-    console.log(tempColumnNum);
-    console.log(scaleSize)
 }
 
 //sketchBox
 
 var sketchBox = document.createElement('div')
 sketchBox.appendChild(regularGridRow)
+
+//button for reset
+var buttonReset = document.createElement('button')
+buttonReset.style.cssText = buttonGridSelector.style.cssText;
+buttonReset.textContent = 'Reset'
+buttonReset.addEventListener('click', function(e){
+   var blank = [].slice.call(document.querySelectorAll('.column'))
+   blank.forEach(function(item){
+        item.style.backgroundColor = 'white';
+   })
+})
 
 //color change button
 var colorChange = document.createElement('button')
@@ -122,7 +122,7 @@ colorChange.addEventListener('click', function(e){
     }
     grayscale.textContent = 'Grayscale Mode: Off'
 })
-//grayscale 
+//grayscale button
 var grayscale = document.createElement('button')
 grayscale.style.cssText = colorChange.style.cssText
 grayscale.textContent = 'Grayscale Mode: Off'
@@ -130,17 +130,20 @@ grayscale.addEventListener('click', function(e){
     colorChange.textContent = 'Rainbow Mode: Off'
     if(grayscale.textContent == 'Grayscale Mode: Off'){
         grayscale.textContent = 'Grayscale Mode: On';
+
     } else {
         grayscale.textContent = 'Grayscale Mode: Off';
     }
 })
 
-//black fill
+//fill
 sketchBox.addEventListener('mouseover', function(e){
     if(grayscale.textContent !== 'Grayscale Mode: On' && colorChange.textContent !== 'Rainbow Mode: On' && e.target.classList.value !== 'row'){
-        //console.log(e.target.classList.value)
-       e.target.style.backgroundColor = 'black';
-    }    
+       e.target.style.backgroundColor = 'black'
+    }
+    else if(grayscale.textContent == 'Grayscale Mode: On' && e.target.classList.value !== 'row'){
+
+     }       
 })
 
 
