@@ -52,7 +52,7 @@ var buttonReset = document.createElement('button')
 buttonReset.style.cssText = buttonGridSelector.style.cssText;
 buttonReset.textContent = 'Reset'
 buttonReset.addEventListener('click', function(){
-    regularGridColumn.style.backgroundColor = 'white';
+    regularGridRow.childNodes.style.backgroundColor = 'white'
 })
 
 // options 
@@ -87,19 +87,21 @@ function selectFunction(e){ // how do I pick the specific option?
     var whichSelect = e.target.id
     console.log(e.target.id)
     if(whichSelect == 'setRow'){
-        tempRowNum = e.target.options[selectedIndex].value;
-        console.log(tempRowNum);
+        tempRowNum = tempRowNum = Number(e.target.options[selectedIndex].value);
     }
     if(whichSelect == 'setColumn'){
-        tempColumnNum = e.target.options[selectedIndex].value;
-        console.log(tempColumnNum)
+        tempColumnNum = tempRowNum = Number(e.target.options[selectedIndex].value);
     }
-    if (tempRowNum<tempColumnNum){
-        scaleSize = 900/tempColumnNum;
+    //scaling
+    if (tempRowNum > tempColumnNum){
+        scaleSize = 700/tempRowNum;
     }
-    else if (tempRowNum => tempColumnNum){
-        scaleSize = 900/tempRowNum;
+    else if (tempRowNum <= tempColumnNum){
+        scaleSize = 700/tempColumnNum;
     }
+    console.log(tempRowNum);
+    console.log(tempColumnNum);
+    console.log(scaleSize)
 }
 
 //sketchBox
