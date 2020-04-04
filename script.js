@@ -15,7 +15,8 @@ regularGridRow.classList = 'row';
 regularGridColumn.classlist = 'column';
 regularGridColumn.cssText = 'display: inline;'
 regularGridRow.appendChild(regularGridColumn);
-regularGridColumn.style.cssText = 'border: 2px solid grey; text-align: center; display:inline-block; background-color: white; margin-right: -2px';
+regularGridColumn.style.cssText = 'border: 2px solid grey; text-align: center; display:inline-block; margin-right: -2px';
+regularGridColumn.style.backgroundColor = 'white';
 regularGridRow.style.cssText = 'text-align: center; margin-bottom: -7px;'
 
 // button for selecting grid layout
@@ -34,9 +35,11 @@ function gridLayout(e){
     regularGridColumn.style.cssText += 'width: ' + scaleSize + 'px;' + ' height:' + scaleSize + 'px;'
     if(e.target.classList.value == 'select-button'){
         for(i=0; i<tempColumnNum; i++){
+            regularGridColumn.id = 'column' + i;
             regularGridRow.appendChild(regularGridColumn.cloneNode(true));
         }
         for(i=1; i<tempRowNum; i++){
+            regularGridRow.id = 'row' + i;
             sketchBox.appendChild(regularGridRow.cloneNode(true));
         }
     }
@@ -49,7 +52,7 @@ var buttonReset = document.createElement('button')
 buttonReset.style.cssText = buttonGridSelector.style.cssText;
 buttonReset.textContent = 'Reset'
 buttonReset.addEventListener('click', function(){
-    regularGridColumn.style.cssText = regularGridColumn.style.cssText;
+    regularGridColumn.style.backgroundColor = 'white';
 })
 
 // options 
@@ -91,11 +94,11 @@ function selectFunction(e){ // how do I pick the specific option?
         tempColumnNum = e.target.options[selectedIndex].value;
         console.log(tempColumnNum)
     }
-    if (tempRowNum>tempColumnNum){
-        scaleSize = 900/tempRowNum;
+    if (tempRowNum<tempColumnNum){
+        scaleSize = 900/tempColumnNum;
     }
-    else if (tempRowNum <= tempColumnNum){
-        scaleSize = 900/tempColumnNum
+    else if (tempRowNum => tempColumnNum){
+        scaleSize = 900/tempRowNum;
     }
 }
 
@@ -103,8 +106,6 @@ function selectFunction(e){ // how do I pick the specific option?
 
 var sketchBox = document.createElement('div')
 sketchBox.appendChild(regularGridRow)
-
-//black fill
 
 //color change button
 var colorChange = document.createElement('button')
@@ -117,11 +118,34 @@ colorChange.addEventListener('click', function(e){
     else {
         colorChange.textContent = 'Rainbow Mode: On'
     }
+    grayscale.textContent = 'Grayscale Mode: Off'
 })
+//grayscale 
+var grayscale = document.createElement('button')
+grayscale.style.cssText = colorChange.style.cssText
+grayscale.textContent = 'Grayscale Mode: Off'
+grayscale.addEventListener('click', function(e){
+    colorChange.textContent = 'Rainbow Mode: Off'
+    if(grayscale.textContent == 'Grayscale Mode: Off'){
+        grayscale.textContent = 'Grayscale Mode: On';
+    } else {
+        grayscale.textContent = 'Grayscale Mode: Off';
+    }
+})
+
+//black fill
+sketchBox.addEventListener('mouseover', function(e){
+    if(grayscale.textContent !== 'Grayscale Mode: On' && colorChange.textContent !== 'Rainbow Mode: On' && e.target.classList.value !== 'row'){
+        //console.log(e.target.classList.value)
+       e.target.style.backgroundColor = 'black';
+    }    
+})
+
 
 //testing
 mainBox.appendChild(optionsBox);
 mainBox.appendChild(buttonGridSelector);
 mainBox.appendChild(buttonReset);
 mainBox.appendChild(colorChange);
+mainBox.appendChild(grayscale)
 
