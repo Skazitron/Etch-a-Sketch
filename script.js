@@ -138,16 +138,26 @@ grayscale.addEventListener('click', function(e){
 
 //fill
 var gsFill = 0;
+var sinRed;
+var sinBlue;
+var sinGreen;
+var colorSin = 0;
 sketchBox.addEventListener('mouseover', function(e){        
     if(grayscale.textContent !== 'Grayscale Mode: On' && colorChange.textContent !== 'Rainbow Mode: On' && e.target.classList.value !== 'row'){
        e.target.style.backgroundColor = 'black'
     }
     else if(grayscale.textContent == 'Grayscale Mode: On' && e.target.classList.value !== 'row'){
-        gsFill = (gsFill + 5)%255;
+        gsFill = (gsFill + 3)%255;
         e.target.style.backgroundColor = `rgb(${gsFill}, ${gsFill}, ${gsFill})`
      }       
-    else if(colorChange.textContent !== 'Rainbow Mode: On' && e.target.classList.value !== 'row'){
-        
+    else if(colorChange.textContent == 'Rainbow Mode: On' && e.target.classList.value !== 'row'){
+        colorSin += 0.02;
+        console.log(colorSin)
+        sinRed = Math.floor(((Math.sin(colorSin) + 1)/2) * 255) + 1
+        sinBlue = Math.floor(((Math.sin(colorSin + 0.78539816339) + 1)/2) * 255) + 1
+        sinGreen = Math.floor(((Math.sin(colorSin + 1.57079632679) + 1)/2) * 255) + 1
+        e.target.style.backgroundColor = `rgb(${sinRed}, ${sinBlue}, ${sinGreen})`
+
     }
 })
 
