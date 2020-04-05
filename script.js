@@ -79,10 +79,10 @@ function selectFunction(e){
     console.log(e.target.options[selectedIndex].value);
     var whichSelect = e.target.id
     if(whichSelect == 'setRow'){
-        tempRowNum = tempRowNum = Number(e.target.options[selectedIndex].value);
+        tempRowNum = Number(e.target.options[selectedIndex].value);
     }
     if(whichSelect == 'setColumn'){
-        tempColumnNum = tempRowNum = Number(e.target.options[selectedIndex].value);
+        tempColumnNum = Number(e.target.options[selectedIndex].value);
     }
     //scaling
     if (tempRowNum > tempColumnNum){
@@ -137,13 +137,18 @@ grayscale.addEventListener('click', function(e){
 })
 
 //fill
-sketchBox.addEventListener('mouseover', function(e){
+var gsFill = 0;
+sketchBox.addEventListener('mouseover', function(e){        
     if(grayscale.textContent !== 'Grayscale Mode: On' && colorChange.textContent !== 'Rainbow Mode: On' && e.target.classList.value !== 'row'){
        e.target.style.backgroundColor = 'black'
     }
     else if(grayscale.textContent == 'Grayscale Mode: On' && e.target.classList.value !== 'row'){
-
+        gsFill = (gsFill + 5)%255;
+        e.target.style.backgroundColor = `rgb(${gsFill}, ${gsFill}, ${gsFill})`
      }       
+    else if(colorChange.textContent !== 'Rainbow Mode: On' && e.target.classList.value !== 'row'){
+        
+    }
 })
 
 
