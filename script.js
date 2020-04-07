@@ -25,7 +25,7 @@ var tempRowNum;
 var buttonGridSelector = document.createElement('button')
 buttonGridSelector.textContent = 'Select';
 buttonGridSelector.classList = 'select-button'
-buttonGridSelector.style.cssText = 'color: white; background-color: black; border-style: solid; border-radius: 6px; width: 4%; font-size: 18px; margin: 0;'
+buttonGridSelector.style.cssText = 'color: white; background-color: black; border-style: solid; border-radius: 6px; font-size: 18px; margin: 0;'
 buttonGridSelector.addEventListener('click', gridLayout)
 function gridLayout(e){
     console.log(e.target.classList.value)
