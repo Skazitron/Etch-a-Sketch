@@ -1,4 +1,4 @@
-### Etch-a-Sketch
+# Etch-a-Sketch
 
 ## About:
 This is my first official project that I took to completion. It was guided by the Odin Project.
