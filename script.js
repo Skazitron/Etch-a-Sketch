@@ -142,8 +142,7 @@ var sinRed;
 var sinBlue;
 var sinGreen;
 var colorSin = 0;
-sketchBox.addEventListener('mouseup mousedown', function(e){      
-    if (e.type == "mousedown") {
+sketchBox.addEventListener('mouseup mousedown', function(e){   
         if(grayscale.textContent !== 'Grayscale Mode: On' && colorChange.textContent !== 'Rainbow Mode: On' && e.target.classList.value !== 'row'){
            e.target.style.backgroundColor = 'black'
         }
@@ -160,8 +159,6 @@ sketchBox.addEventListener('mouseup mousedown', function(e){
             e.target.style.backgroundColor = `rgb(${sinRed}, ${sinBlue}, ${sinGreen})`
 
         }
-    }
-    
 })
 
 
